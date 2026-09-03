@@ -45,16 +45,7 @@ class HistoryItemDecorator: Identifiable, Hashable, HasVisibility {
   var thumbnailImageGenerationTask: Task<(), Error>?
   var previewImage: NSImage?
   // 10k characters seems to be more than enough on large displays
-  @ObservationIgnored
-  private var cachedPreviewText: String?
-  var previewText: String {
-    if let cached = cachedPreviewText {
-      return cached
-    }
-    let text = item.previewableText.shortened(to: 10_000)
-    cachedPreviewText = text
-    return text
-  }
+  var previewText: String { item.previewableText.shortened(to: 10_000) }
   var thumbnailImage: NSImage?
   var applicationImage: ApplicationImage
 
