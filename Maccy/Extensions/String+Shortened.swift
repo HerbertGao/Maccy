@@ -1,5 +1,5 @@
 extension String {
   func shortened(to maxLength: Int) -> String {
-    String(prefix(maxLength))
+    String(prefix(max(0, maxLength)))
   }
 }

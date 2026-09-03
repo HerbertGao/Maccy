@@ -136,11 +136,15 @@ class ClipboardTests: XCTestCase {
     XCTAssertFalse(Defaults[.ignoreOnlyNextEvent])
   }
 
-  private var currentSourceApp: String {
-    NSWorkspace.shared.frontmostApplication?.bundleIdentifier ?? "com.apple.finder"
+  private var currentSourceApp: String? {
+    NSWorkspace.shared.frontmostApplication?.bundleIdentifier
   }
 
-  func testIgnoreApplication() {
+  func testIgnoreApplication() throws {
+    guard let currentSourceApp else {
+      throw XCTSkip("No frontmost application available")
+    }
+
     Defaults[.ignoredApps] = [currentSourceApp, "com.apple.dt.Xcode", "com.apple.finder"]
 
     let hookExpectation = expectation(description: "Hook is called")
@@ -154,7 +158,11 @@ class ClipboardTests: XCTestCase {
     waitForExpectations(timeout: 2)
   }
 
-  func testIgnoreAllApplicationsExcept() {
+  func testIgnoreAllApplicationsExcept() throws {
+    guard let currentSourceApp else {
+      throw XCTSkip("No frontmost application available")
+    }
+
     Defaults[.ignoreAllAppsExceptListed] = true
     Defaults[.ignoredApps] = [currentSourceApp, "com.apple.dt.Xcode", "com.apple.finder"]
 

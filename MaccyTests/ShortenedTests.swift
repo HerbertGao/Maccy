@@ -15,6 +15,10 @@ final class ShortenedTests: XCTestCase {
     XCTAssertEqual("abcdefghij".shortened(to: 1_000), "abcdefghij")
   }
 
+  func testShortenedNegativeLengthReturnsEmpty() {
+    XCTAssertEqual("abcdef".shortened(to: -1), "")
+  }
+
   func testShortenedResultNeverExceedsMaxLength() {
     let input = "abcdef"
     for length in 0...8 {
