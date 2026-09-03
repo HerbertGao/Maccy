@@ -141,7 +141,7 @@ class ClipboardTests: XCTestCase {
   }
 
   func testIgnoreApplication() {
-    Defaults[.ignoredApps] = [currentSourceApp]
+    Defaults[.ignoredApps] = [currentSourceApp, "com.apple.dt.Xcode", "com.apple.finder"]
 
     let hookExpectation = expectation(description: "Hook is called")
     hookExpectation.isInverted = true
@@ -156,7 +156,7 @@ class ClipboardTests: XCTestCase {
 
   func testIgnoreAllApplicationsExcept() {
     Defaults[.ignoreAllAppsExceptListed] = true
-    Defaults[.ignoredApps] = [currentSourceApp]
+    Defaults[.ignoredApps] = [currentSourceApp, "com.apple.dt.Xcode", "com.apple.finder"]
 
     let hookExpectation = expectation(description: "Hook is called")
     clipboard.onNewCopy({ (_: HistoryItem) in
