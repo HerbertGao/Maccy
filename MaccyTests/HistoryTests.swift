@@ -207,7 +207,7 @@ class HistoryTests: XCTestCase { // swiftlint:disable:this type_body_length
     let item = history.add(historyItem(text))
 
     XCTAssertEqual(item.previewText, String(text.prefix(10_000)))
-    XCTAssertEqual(item.item.text?.count, text.count)
+    XCTAssertEqual(item.item.text, text)
   }
 
   func testClearingUnpinned() throws {
